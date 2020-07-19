@@ -12,12 +12,12 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./
       with:
-        names: "Linux/X11, HTML5, Android, 'Windows Desktop', 'Mac OSX'"
+        names: "HTML5, Android, 'Windows Desktop', 'Mac OSX'"
         path-to-game: "tester"
         debug-mode: "true"
     - run: |
         git config user.email github-actions@github.com
         git config user.name github-actions
-        git add ./builds/*
+        git add ./tester/builds/*
         git commit -m 'builds generated'
         git push --force

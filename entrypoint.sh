@@ -7,8 +7,7 @@
 
 set -e
 
-cd ./$2
-mkdir -p ./builds
+mkdir -p ./$2/builds
 IFS=','
 export_mode=export-debug
 
@@ -23,7 +22,7 @@ do
     # need to remove spaces/quotes for filename
     removed_quotes=$(echo "$i" | tr -d \'\" | tr -d '\040\011\012\015')
     # doesnt matter if $2 has a trailing slash already
-    godot --$export_mode $i builds/$removed_quotes-build.zip -v
+    godot --$export_mode $i builds/$removed_quotes-build.zip --path ./$2 -v
     # debug command
     # touch builds/$removed_quotes-build.zip
 done
@@ -31,7 +30,7 @@ done
 # place all builds into a builds.zip file so we only have one zipped output
 # that can be unzipped directly to builds, and not builds/something-build.zip
 if [[ ${#strarr[@]} > 1 ]] ; then
-    cd builds/
+    cd ./$2/builds/
     rm -f builds.zip ||:
     zip -r ../builds.zip . -i *
     mv ../builds.zip ./builds.zip
