@@ -22,9 +22,9 @@ jobs:
     # or just unzip everything, individual files are likely small enough
     - run: |
         unzip ./tester/builds/builds.zip
-        mv ./tester/builds/builds.zip ./tester/builds.zip
         git config user.email github-actions@github.com
         git config user.name github-actions
         git add ./tester/builds/*
+        git reset -- ./tester/builds/builds.zip
         git commit -m 'builds generated'
         git push --force
