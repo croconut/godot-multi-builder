@@ -15,7 +15,13 @@ jobs:
         names: "Linux/X11, HTML5, Android, WindowsDesktop, MacOSX"
         path-to-game: "tester"
         debug-mode: "true"
+    # note: unzipping builds here as builds.zip (the zipped output folder
+    # that this action generates) is too large a file for 
+    # github when building all available options
+    # could send it somewhere else though e.g. some kind of deploy
+    # or just unzip everything, individual files are likely small enough
     - run: |
+        unzip ./tester/builds/builds.zip
         git config user.email github-actions@github.com
         git config user.name github-actions
         git add ./tester/builds/*
