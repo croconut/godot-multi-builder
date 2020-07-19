@@ -29,7 +29,7 @@ read -a strarr <<< "$1"
 for i in "${strarr[@]}"
 do
     # need to remove spaces/quotes/slashes for filename
-    i=$(echo "$i" | tr '"' "'")
+    i=$(echo "$i" | tr "'" '"')
     removed_quotes=$(echo "$i" | tr -d \"\\\/ | tr -d '\040\011\012\015')
     # doesnt matter if $2 has a trailing slash already
     godot --$export_mode $i builds/$removed_quotes-build.zip --path ./$2 -v
