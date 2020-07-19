@@ -1,4 +1,4 @@
-name: "godot-android-builder"
+name: "godot-multi-builder"
 author: "Matthew Stevens"
 description: "Builds for Android, Windows, Mac OSX, HTML5 and/or Linux"
 inputs:
