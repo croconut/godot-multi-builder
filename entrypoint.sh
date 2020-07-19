@@ -10,10 +10,7 @@ set -e
 mkdir -p ./$2/builds
 mkdir -p ~/.local/share/godot/templates
 
-# move all hidden / not hidden templates (idk why a template would be hidden
-# this is more a future proofing)
 mv /root/.local/share/godot/templates/* ~/.local/share/godot/templates
-mv /root/.local/share/godot/templates/.* ~/.local/share/godot/templates
 
 IFS=','
 export_mode=export-debug
