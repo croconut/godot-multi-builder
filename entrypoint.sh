@@ -9,8 +9,11 @@ set -e
 
 mkdir -p ./$2/builds
 mkdir -p ~/.local/share/godot/templates
+mkdir -p ~/.config/godot/
 
+# need to move templates and init android settings from docker image
 mv /root/.local/share/godot/templates/* ~/.local/share/godot/templates
+mv /root/.config/godot/editor_settings-3.tres ~/.config/godot/
 
 IFS=','
 export_mode=export-debug
