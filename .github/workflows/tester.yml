@@ -1,0 +1,23 @@
+name: Build tester
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./
+      with:
+        names: "Linux, HTML5, Android, 'Windows Desktop', 'Mac OSX'"
+        path-to-game: "tester"
+        debug-mode: "true"
+    - run: |
+        git config user.email github-actions@github.com
+        git config user.name github-actions
+        git add ./builds/*
+        git commit -m 'builds generated'
+        git push --force

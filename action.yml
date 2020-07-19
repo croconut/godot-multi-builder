@@ -1,0 +1,27 @@
+name: "godot-android-builder"
+author: "Matthew Stevens"
+description: "Builds for Android, Windows, Mac OSX, HTML5 or Linux"
+inputs:
+  names:
+    description: "Comma separated build names, as defined in your export_presets.cfg file."
+    required: true
+    #example: "'Android x86',Windows,Linux"
+  path-to-game:
+    description: "Where your godot.project file is located, relative to your repo's top level."
+    required: false
+    default: "./"
+  # giving the debug vs. not debug option for release handling
+  debug-mode:
+    description: "Whether to export in debug-mode"
+    required: false
+    default: "true"
+outputs:
+  builds:
+    description: "The folder containing the zipped builds"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args: 
+  - ${{ inputs.names }}
+  - ${{ inputs.path-to-game }}
+  - ${{ inputs.debug-mode }}
