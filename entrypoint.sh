@@ -15,6 +15,8 @@ mkdir -p ~/.config/godot/
 mv /root/.local/share/godot/templates/* ~/.local/share/godot/templates
 mv /root/.config/godot/editor_settings-3.tres ~/.config/godot/
 
+cd ./$2
+
 IFS=','
 export_mode=export-debug
 
@@ -24,15 +26,12 @@ fi
 
 read -a strarr <<< "$1"
 
-
-
 for i in "${strarr[@]}"
 do
     # need to remove spaces/quotes/slashes for filename
-    i=$(echo "$i" | tr "'" '"')
     removed_quotes=$(echo "$i" | tr -d \"\\\/ | tr -d '\040\011\012\015')
     # doesnt matter if $2 has a trailing slash already
-    godot --$export_mode ${i} builds/$removed_quotes-build.zip --path ./$2 -v
+    godot --$export_mode ${i} builds/$removed_quotes-build.zip -v
     # debug command
     # touch builds/$removed_quotes-build.zip
 done
@@ -40,7 +39,7 @@ done
 # place all builds into a builds.zip file so we only have one zipped output
 # that can be unzipped directly to builds, and not builds/something-build.zip
 if [[ ${#strarr[@]} > 1 ]] ; then
-    cd ./$2/builds/
+    cd ./builds/
     rm -f builds.zip ||:
     zip -r ../builds.zip . -i *
     mv ../builds.zip ./builds.zip
